@@ -8,7 +8,8 @@
     "build": "npm run build:checkout && npm run build:demo && npm run build:dist",
     "build:checkout": "npm --prefix checkout run build",
     "build:demo": "npm --prefix demo run build",
-    "build:dist": "node -e \"const fs = require('fs'); const path = require('path'); const dest = path.join('demo', 'dist', 'checkout'); fs.cpSync(path.join('checkout', 'dist'), dest, { recursive: true }); console.log('Unified dist ready at demo/dist');\""
+    "build:dist": "node -e \"const fs = require('fs'); const path = require('path'); const dest = path.join('demo', 'dist', 'checkout'); fs.cpSync(path.join('checkout', 'dist'), dest, { recursive: true }); console.log('Unified dist ready at demo/dist');\"",
+    "deploy": "npm run build && node publish-gh-pages.cjs"
   },
   "devDependencies": {
     "concurrently": "^9.0.0"
