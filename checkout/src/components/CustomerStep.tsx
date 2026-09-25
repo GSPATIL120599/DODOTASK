@@ -18,9 +18,9 @@ export function CustomerStep({
   onProceed,
 }: CustomerStepProps) {
   return (
-    <div className="mt-5 space-y-5">
+    <div className="mt-3 space-y-5">
       {/* Product Summary */}
-      <div className="rounded-2xl border border-slate-100 bg-slate-50/80 p-4">
+      <div className="rounded-2xl border group border-slate-100 bg-slate-50/80 px-4 py-2">
         <div className="flex items-start justify-between gap-3">
           <div>
             <span className="inline-block rounded-md bg-blue-100 px-2 py-0.5 text-[10px] font-semibold text-blue-700 uppercase">
@@ -43,12 +43,15 @@ export function CustomerStep({
           </div>
         </div>
 
-        <div className="mt-3 flex flex-wrap gap-2 border-t border-slate-200/60 pt-2.5 text-[11px] text-slate-600">
-          <span className="inline-flex items-center gap-1 rounded-full bg-white px-2 py-0.5 border border-slate-200 shadow-2xs">
-            <Sparkles size={11} className="text-amber-500" /> Instant Access
+        <div className="mt-1.5 hidden flex-wrap gap-2 border-t border-slate-200/60 pt-2.5 text-[11px] text-slate-600 group-hover:flex">
+          <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2 py-0.5 shadow-2xs">
+            <Sparkles size={11} className="text-amber-500" />
+            Instant Access
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-white px-2 py-0.5 border border-slate-200 shadow-2xs">
-            <ShieldCheck size={11} className="text-emerald-500" /> Money-back guarantee
+
+          <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2 py-0.5 shadow-2xs">
+            <ShieldCheck size={11} className="text-emerald-500" />
+            Money-back guarantee
           </span>
         </div>
       </div>
@@ -66,11 +69,10 @@ export function CustomerStep({
             value={customer.email}
             onChange={(e) => onChange({ email: e.target.value })}
             autoComplete="email"
-            className={`h-10 w-full rounded-xl border px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 ${
-              errors.email
-                ? "border-red-400 bg-red-50/20 focus:border-red-500 focus:ring-2 focus:ring-red-100"
-                : "border-slate-300 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10"
-            }`}
+            className={`h-8 w-full rounded-xl border px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 ${errors.email
+              ? "border-red-400 bg-red-50/20 focus:border-red-500 focus:ring-2 focus:ring-red-100"
+              : "border-slate-300 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10"
+              }`}
           />
           {errors.email && (
             <p className="mt-1 text-xs text-red-600 font-medium">{errors.email}</p>
@@ -88,11 +90,10 @@ export function CustomerStep({
             value={customer.name}
             onChange={(e) => onChange({ name: e.target.value })}
             autoComplete="name"
-            className={`h-10 w-full rounded-xl border px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 ${
-              errors.name
-                ? "border-red-400 bg-red-50/20 focus:border-red-500 focus:ring-2 focus:ring-red-100"
-                : "border-slate-300 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10"
-            }`}
+            className={`h-8 w-full rounded-xl border px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 ${errors.name
+              ? "border-red-400 bg-red-50/20 focus:border-red-500 focus:ring-2 focus:ring-red-100"
+              : "border-slate-300 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10"
+              }`}
           />
           {errors.name && (
             <p className="mt-1 text-xs text-red-600 font-medium">{errors.name}</p>

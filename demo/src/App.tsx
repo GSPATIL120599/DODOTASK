@@ -27,7 +27,6 @@ export default function App() {
     ]);
   };
 
-  // Inspect return redirect query parameters
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const status = params.get("status");
@@ -72,15 +71,11 @@ export default function App() {
     }
   }, []);
 
-  // Derive the stable root URL of the demo (without query params / trailing slash)
   const getDemoRootUrl = () => {
     if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
       return `${window.location.origin}`;
     }
-    // On GitHub Pages: pathname is e.g. /DODOTASK/  → keep the repo prefix
     const pathParts = window.location.pathname.split("/").filter(Boolean);
-    // Demo is at the root of the deployment folder — one level above /checkout/
-    // pathname for demo is /DODOTASK/ so pathParts = ["DODOTASK"]
     return `${window.location.origin}/${pathParts[0] ?? ""}/`;
   };
 
