@@ -35,7 +35,7 @@ npm run dev
 ### 🌐 Access URLs
 | Service | URL | Role |
 | :--- | :--- | :--- |
-| **Acme Demo Merchant Store** | **[http://localhost:5175](http://localhost:5175)** | Host website embedding the checkout SDK |
+| **Acme Demo Merchant Store** | **[[http://localhost:5175](http://localhost:5175)](https://gspatil120599.github.io/DODOTASK)** | Host website embedding the checkout SDK |
 | **Dodo Checkout Engine** | **[http://localhost:5173](http://localhost:5173)** | Sandboxed checkout application |
 
 ---
