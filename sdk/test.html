@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>Dodo SDK Test</title>
+
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family:
+          Inter,
+          system-ui,
+          sans-serif;
+        background: #f3f4f6;
+      }
+
+      button {
+        border: 0;
+        border-radius: 8px;
+        padding: 12px 20px;
+        background: #111827;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #000;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button id="checkout-button">
+      Buy Premium Developer Course
+    </button>
+
+    <script type="module">
+      import { DodoCheckout } from "./index.ts";
+
+      const button =
+        document.getElementById(
+          "checkout-button"
+        );
+
+      button.addEventListener(
+        "click",
+        () => {
+          DodoCheckout.open({
+            productId: "prod_123",
+
+            onSuccess: ({
+              sessionId,
+            }) => {
+              console.log(
+                "PAYMENT SUCCESS:",
+                sessionId
+              );
+            },
+
+            onClose: ({
+              reason,
+            }) => {
+              console.log(
+                "CHECKOUT CLOSED:",
+                reason
+              );
+            },
+
+            onError: ({
+              code,
+              message,
+            }) => {
+              console.log(
+                "PAYMENT ERROR:",
+                code,
+                message
+              );
+            },
+          });
+        }
+      );
+    </script>
+  </body>
+</html>

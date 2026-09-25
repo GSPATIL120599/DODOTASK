@@ -1,0 +1,16 @@
+{
+  "name": "dodo-checkout-assignment",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:checkout\" \"npm run dev:demo\"",
+    "dev:checkout": "npm --prefix checkout run dev -- --port 5173",
+    "dev:demo": "npm --prefix demo run dev -- --port 5175",
+    "build": "npm run build:checkout && npm run build:demo && npm run build:dist",
+    "build:checkout": "npm --prefix checkout run build",
+    "build:demo": "npm --prefix demo run build",
+    "build:dist": "node -e \"const fs = require('fs'); const path = require('path'); const dest = path.join('demo', 'dist', 'checkout'); fs.cpSync(path.join('checkout', 'dist'), dest, { recursive: true }); console.log('Unified dist ready at demo/dist');\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}

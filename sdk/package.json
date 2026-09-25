@@ -1,0 +1,15 @@
+{
+  "name": "dodo-checkout-sdk",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vite": "^7.0.0"
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
+  }
+}
