@@ -14,12 +14,14 @@ export default function App() {
 
   const searchParams = new URLSearchParams(window.location.search);
   const productId = searchParams.get("productId") ?? "prod_123";
-  const defaultReturnUrl =
-    typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
-      ? "http://localhost:5175"
-      : typeof window !== "undefined"
-      ? window.location.origin
-      : "http://localhost:5175";
+  const defaultReturnUrl = (() => {
+    const { hostname, origin, pathname } = window.location;
+    if (hostname === "localhost" || hostname === "127.0.0.1") return "http://localhost:5175";
+    // On GitHub Pages, checkout is at /DODOTASK/checkout/  →  demo is at /DODOTASK/
+    const parts = pathname.split("/").filter(Boolean); // ["DODOTASK", "checkout"]
+    parts.pop(); // remove "checkout"
+    return `${origin}/${parts.join("/")}/`; // "https://gspatil120599.github.io/DODOTASK/"
+  })();
   const returnUrlParam = searchParams.get("returnUrl") || defaultReturnUrl;
   const initialStep = (searchParams.get("step") as CheckoutStep) || "checkout";
   const isEmbedParam = searchParams.get("embedded") === "true";

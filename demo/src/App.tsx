@@ -72,20 +72,28 @@ export default function App() {
     }
   }, []);
 
-  const getCheckoutUrl = () => {
-    if (import.meta.env.VITE_CHECKOUT_URL) {
-      return import.meta.env.VITE_CHECKOUT_URL;
+  // Derive the stable root URL of the demo (without query params / trailing slash)
+  const getDemoRootUrl = () => {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      return `${window.location.origin}`;
     }
-    if (typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
-      return "http://localhost:5173";
-    }
-    const cleanPath = window.location.pathname.replace(/\/$/, "");
-    return `${window.location.origin}${cleanPath}/checkout/`;
+    // On GitHub Pages: pathname is e.g. /DODOTASK/  → keep the repo prefix
+    const pathParts = window.location.pathname.split("/").filter(Boolean);
+    // Demo is at the root of the deployment folder — one level above /checkout/
+    // pathname for demo is /DODOTASK/ so pathParts = ["DODOTASK"]
+    return `${window.location.origin}/${pathParts[0] ?? ""}/`;
   };
 
-  const getReturnUrl = () => {
-    return typeof window !== "undefined" ? window.location.href.split("?")[0] : "http://localhost:5175";
+  const getCheckoutUrl = () => {
+    if (import.meta.env.VITE_CHECKOUT_URL) return import.meta.env.VITE_CHECKOUT_URL;
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      return "http://localhost:5173";
+    }
+    // checkout is deployed as a subdirectory of the demo dist
+    return `${getDemoRootUrl()}checkout/`;
   };
+
+  const getReturnUrl = () => getDemoRootUrl();
 
   const handleBuyRedirect = () => {
     addLog("info", "REDIRECTING", `Navigating to checkout for "${selectedProduct.name}" ($${selectedProduct.price})...`);
